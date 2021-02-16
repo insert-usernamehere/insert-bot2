@@ -183,83 +183,57 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 			client.channels.cache.get('775416029429366854').send('Insert opened discord what will he do');
 		}
 	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '544901224277999616') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('775876460472827934').send('fetts awake time to not die');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '682713876562706433') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('776911204089724939').send('Look who decided to join! Buckets online.');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '683248359322288152') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('775876408866111509').send('Oh look, the cat dragged in a rogue FBI!');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '603319344801251399') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('789489128747958294').send('Greenlog came out of his Forrest. Hide your cheese.');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '701148265202188418') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('785229828663934996').send('cat with no legs is using discord, how can he do it without legs');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '423548273358405632') {
-		if (newPresence.status === 'online') {
-			client.channels.cache.get('775880905994010644').send('sploot is awake, hide your children');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '345959899097989121') {
-		if (newPresence.status === 'dnd') {
-			client.channels.cache.get('775882929439244298').send('Misc is online. Prepare your OwOs.');
-		}
-	}
-});
-
-client.on('presenceUpdate', (oldPresence, newPresence) => {
-	let member = newPresence.member;
-	if (member.id === '241715517042327562') {
+  if (member.id === '241715517042327562') {
 		if (newPresence.status === 'online') {
 			client.channels.cache.get('775890270104715264').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
 		}
 	}
+  if (member.id === '544901224277999616') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('775876460472827934').send('fetts awake time to not die');
+		}
+	}
+  if (member.id === '682713876562706433') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('776911204089724939').send('Look who decided to join! Buckets online.');
+		}
+	}
+  if (member.id === '683248359322288152') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('775876408866111509').send('Oh look, the cat dragged in a rogue FBI!');
+		}
+	}
+  if (member.id === '603319344801251399') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('789489128747958294').send('Greenlog came out of his Forrest. Hide your cheese.');
+		}
+	}
+  if (member.id === '701148265202188418') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('785229828663934996').send('cat with no legs is using discord, how can he do it without legs');
+		}
+	}
+  if (member.id === '423548273358405632') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('775880905994010644').send('sploot is awake, hide your children');
+		}
+	}
+  if (member.id === '345959899097989121') {
+		if (newPresence.status === 'dnd') {
+			client.channels.cache.get('775882929439244298').send('Misc is online. Prepare your OwOs.');
+		}
+	}
+  if (member.id === '241715517042327562') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('775890270104715264').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
+		}
+	}
+    if (member.id === '654877061877465101') {
+		if (newPresence.status === 'online') {
+			client.channels.cache.get('811279561034694697').send('oh peck, golem is here');
+		}
+	}
 });
-
-
-
-
 
 
 client.login(process.env.TOKEN);
