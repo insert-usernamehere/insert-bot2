@@ -262,4 +262,4 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 
 
 
-client.login('Nzc1NDQxNzkxMTE3ODE5OTA1.X6mYcg.Gl2ekf20W13sMv4Ashf6G5URnBA');
+client.login(process.env.TOKEN);
