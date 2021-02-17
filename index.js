@@ -19,7 +19,16 @@ function getRandomInt(max) {
 
 
 client.on('ready', () => {
+  const randomnumber = (getRandomInt(1001));
+  if (randomnumber == 5) {
+    client.user.setActivity("theres a 1 in 1000 chance that this is my status", { type: "PLAYING"})
+  } else if (randomnumber > 1500) {
+    client.user.setActivity("taking over the pasta land", { type: "PLAYING"})
+  } else if (randomnumber < 30) {
+    client.user.setActivity("none of your business", { type: "PLAYING"})
+  } else if (randomnumber > 30) {
   client.user.setActivity("taking over the world", { type: "PLAYING"})
+}
 	console.log('bot is up and running');
 });
 
