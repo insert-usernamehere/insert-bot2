@@ -20,7 +20,7 @@ function getRandomInt(max) {
 
 
 client.on('ready', () => {
-  const randomnumber = (getRandomInt(1001));
+  const randomnumber = (getRandomInt(2001));
   if (randomnumber == 5) {
     client.user.setActivity("theres a 1 in 1000 chance that this is my status", { type: "PLAYING"})
   } else if (randomnumber > 1500) {
@@ -179,6 +179,54 @@ client.on('message', async msg => {
         msg.reply(`<@${unliscetraget}> has been unlisced`)
       } else {
         msg.reply(`<@${unliscetraget}> is not currently lisced.`)
+    }
+    } else {
+      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+     }
+  }
+});
+
+client.on('message', async msg => {
+  if (msg.content.startsWith(".mute")) {
+    if(msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+      let mutetarget1 = msg.mentions.users.first();
+      let mutetarget = mutetarget1.id
+      const mutetarget2 = await msg.guild.members.fetch(mutetarget);
+      if(mutetarget2.roles.cache.find(r => r.name === "Muted")) {
+        msg.reply(`<@${mutetarget}> is already muted`)
+      } else {
+      msg.guild.members.cache.get(mutetarget).roles.add("757938528087965747");
+      msg.reply(`<@${mutetarget}> is now muted`)
+      if(mutetarget2.roles.cache.find(r => r.name === "Pasta Followers")) {
+        msg.guild.members.cache.get(mutetarget).roles.remove("732808275128483872");
+      } 
+      if(mutetarget2.roles.cache.find(r => r.name === "Buddies")) {
+        msg.guild.members.cache.get(mutetarget).roles.remove("757556192330514492");
+      } 
+      if(mutetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
+        msg.guild.members.cache.get(mutetarget).roles.remove("732799191801397311");
+      }
+    }
+    } else {
+      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+     }
+  }
+});
+
+client.on('message', async msg => {
+  if (msg.content.startsWith(".unmute")) {
+    if(msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+      let unmutetarget1 = msg.mentions.users.first();
+      let unmutetarget = unmutetarget1.id
+      const unmutetarget2 = await msg.guild.members.fetch(unmutetarget);
+      if(unmutetarget2.roles.cache.find(r => r.name === "Muted")) {
+        msg.guild.members.cache.get(unmutetarget).roles.remove("757938528087965747");
+        msg.guild.members.cache.get(unmutetarget).roles.add("732808275128483872");
+        msg.guild.members.cache.get(unmutetarget).roles.add("757556192330514492");
+        msg.guild.members.cache.get(unmutetarget).roles.add("732799191801397311");
+        msg.reply(`<@${unmutetarget}> has been unmutted`)
+      } else {
+        msg.reply(`<@${unmutetarget}> is not currently mutted.`)
     }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
