@@ -12,6 +12,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require("axios");
 var cron = require("cron");
+const moment = require("moment");
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -182,6 +183,13 @@ client.on('message', async msg => {
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
      }
+  }
+});
+
+client.on('message', async msg => {
+  if (msg.content.startsWith("how long until splatoon 3")) {
+    let splat3 = moment("20221218", "YYYYMMDD").fromNow();
+    msg.channel.send(`possibly ${splat3}`)
   }
 });
 
