@@ -22,7 +22,7 @@ function getRandomInt(max) {
 client.on('ready', () => {
   const randomnumber = (getRandomInt(2001));
   if (randomnumber == 5) {
-    client.user.setActivity("theres a 1 in 1000 chance that this is my status", { type: "PLAYING"})
+    client.user.setActivity("theres a 1 in 2000 chance that this is my status", { type: "PLAYING"})
   } else if (randomnumber > 1500) {
     client.user.setActivity("taking over the pasta land", { type: "PLAYING"})
   } else if (randomnumber < 30) {
@@ -214,6 +214,49 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
+  if (msg.content.startsWith(".mod")) {
+    if(msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
+      let modtarget1 = msg.mentions.users.first();
+      let modtarget = modtarget1.id
+      const modtarget2 = await msg.guild.members.fetch(modtarget);
+      if(modtarget2.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+        msg.reply(`<@${modtarget}> is already a mod`)
+      } else {
+      msg.guild.members.cache.get(modtarget).roles.add("761295684497571872");
+      msg.guild.members.cache.get(modtarget).roles.add("766444560976576533");
+      msg.reply(`<@${modtarget}> is now a mod welcome to the cool kids club`)
+    }
+    } else {
+      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+     }
+  }
+});
+
+client.on('message', async msg => {
+  if (msg.content.startsWith(".demod")) {
+    if(msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
+      let unmodtarget1 = msg.mentions.users.first();
+      let unmodtarget = unmodtarget1.id
+      const unmodtarget2 = await msg.guild.members.fetch(unmodtarget);
+      if(unmodtarget2.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+        msg.guild.members.cache.get(unmodtarget).roles.remove("761295684497571872");
+        if(unmodtarget2.roles.cache.find(r => r.name === "Moderators")) {
+          msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
+        }
+        if(unmodtarget2.roles.cache.find(r => r.name === "admin")) {
+          msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
+        }
+        msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
+      } else {
+      msg.reply(`<@${unmodtarget}> is not a mod`)
+    }
+    } else {
+      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+     }
+  }
+});
+
+client.on('message', async msg => {
   if (msg.content.startsWith(".unmute")) {
     if(msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let unmutetarget1 = msg.mentions.users.first();
@@ -224,7 +267,7 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unmutetarget).roles.add("732808275128483872");
         msg.guild.members.cache.get(unmutetarget).roles.add("757556192330514492");
         msg.guild.members.cache.get(unmutetarget).roles.add("732799191801397311");
-        msg.reply(`<@${unmutetarget}> has been unmutted`)
+        msg.reply(`<@${unmutetarget}> has been unmuted`)
       } else {
         msg.reply(`<@${unmutetarget}> is not currently mutted.`)
     }
@@ -235,11 +278,12 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
-  if (msg.content.startsWith("how long until splatoon 3")) {
+  if (msg.content === "how long until splatoon 3") {
     let splat3 = moment("20221218", "YYYYMMDD").fromNow();
     msg.channel.send(`possibly ${splat3}`)
   }
 });
+
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
 	let member = newPresence.member;
