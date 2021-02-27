@@ -11,8 +11,9 @@ app.listen(port, () =>
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require("axios");
-var cron = require("cron");
+var cron = require("node-cron");
 const moment = require("moment");
+global.istempmod = 0;
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -210,6 +211,42 @@ client.on('message', async msg => {
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
      }
+  }
+});
+
+client.on('message', async msg => {
+  if (msg.content.startsWith(".tempmod")) {
+    if(msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+      if (istempmod == 1) {
+        msg.reply("a temp mod is already running due to discord and js limitations only one person can be a temp mod at a time.")
+      } else {
+        global.istempmod = 1;
+         let tempmodtarget1 = msg.mentions.users.first();
+         let tempmodtarget = tempmodtarget1.id
+         const tempmodtarget2 = await msg.guild.members.fetch(tempmodtarget);
+         if(tempmodtarget2.roles.cache.find(r => r.name === "Temp mod don’t get any ideas")) {
+          msg.reply(`<@${tempmodtarget}> is already a temp mod`)
+        } else {
+          global.istempmod = 1;
+          msg.guild.members.cache.get(tempmodtarget).roles.add("765945607394164756");
+          msg.guild.members.cache.get(tempmodtarget).roles.add("766444560976576533");
+          msg.reply(`<@${tempmodtarget}> is now a temp mod`)
+          var timecontent =  msg.content.split("").slice(32).join("")
+          var tempmod = cron.schedule(timecontent, () => {
+            if(tempmodtarget2.roles.cache.find(r => r.name === "Temp mod don’t get any ideas")) {
+              msg.guild.members.cache.get(tempmodtarget).roles.remove("765945607394164756");
+            }
+            if(tempmodtarget2.roles.cache.find(r => r.name === "Moderators")) {
+              msg.guild.members.cache.get(tempmodtarget).roles.remove("766444560976576533");
+            }
+            global.istempmod = 0;
+            tempmod.stop();
+          });
+        }
+        }
+      } else {
+        msg.channel.send("you don't have enough power to do this come back when your more powerful")
+      }
   }
 });
 
