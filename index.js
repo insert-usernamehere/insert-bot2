@@ -295,7 +295,7 @@ client.on('message', async msg => {
         }
         msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
         var unmodreason =  msg.content.split("").slice(29).join("")
-        client.users.cache.get(unmodtarget).send(`you were unmodded in the pasta land by <@${msg.author.id}> for:${unmodreason}`)
+        client.users.cache.get(unmodtarget).send(`you were demodded in the pasta land by <@${msg.author.id}> for:${unmodreason}`)
       } else {
       msg.reply(`<@${unmodtarget}> is not a mod`)
     }
