@@ -150,6 +150,8 @@ client.on('message', async msg => {
       } else {
       msg.guild.members.cache.get(liscetraget).roles.add("757540103404126229");
       msg.reply(`<@${liscetraget}> is now lisced`)
+      var liscereason =  msg.content.split("").slice(29).join("")
+      client.users.cache.get(liscetarget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
       if(liscetarget2.roles.cache.find(r => r.name === "Pasta Followers")) {
         msg.guild.members.cache.get(liscetraget).roles.remove("732808275128483872");
       } 
@@ -178,6 +180,8 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unliscetraget).roles.add("757556192330514492");
         msg.guild.members.cache.get(unliscetraget).roles.add("732799191801397311");
         msg.reply(`<@${unliscetraget}> has been unlisced`)
+        var unliscereason =  msg.content.split("").slice(31).join("")
+        client.users.cache.get(unliscetarget).send(`you were unlisced in the pasta land by <@${msg.author.id}> for:${unliscereason}`)
       } else {
         msg.reply(`<@${unliscetraget}> is not currently lisced.`)
     }
@@ -207,6 +211,8 @@ client.on('message', async msg => {
       if(mutetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
         msg.guild.members.cache.get(mutetarget).roles.remove("732799191801397311");
       }
+      var mutereason =  msg.content.split("").slice(28).join("")
+      client.users.cache.get(mutetarget).send(`you were muted in the pasta land by <@${msg.author.id}> for:${mutereason}`)
     }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
@@ -231,6 +237,7 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(tempmodtarget).roles.add("765945607394164756");
           msg.guild.members.cache.get(tempmodtarget).roles.add("766444560976576533");
           msg.reply(`<@${tempmodtarget}> is now a temp mod`)
+          client.users.cache.get(modtarget).send(`you were made a temp mod in the pasta land`)
           var timecontent =  msg.content.split("").slice(32).join("")
           var tempmod = cron.schedule(timecontent, () => {
             if(tempmodtarget2.roles.cache.find(r => r.name === "Temp mod don’t get any ideas")) {
@@ -239,6 +246,7 @@ client.on('message', async msg => {
             if(tempmodtarget2.roles.cache.find(r => r.name === "Moderators")) {
               msg.guild.members.cache.get(tempmodtarget).roles.remove("766444560976576533");
             }
+            client.users.cache.get(tempmodtarget).send(`your tempmod in the pastaland expired`)
             global.istempmod = 0;
             tempmod.stop();
           });
@@ -262,6 +270,8 @@ client.on('message', async msg => {
       msg.guild.members.cache.get(modtarget).roles.add("761295684497571872");
       msg.guild.members.cache.get(modtarget).roles.add("766444560976576533");
       msg.reply(`<@${modtarget}> is now a mod welcome to the cool kids club`)
+      var modreason =  msg.content.split("").slice(27).join("")
+      client.users.cache.get(modtarget).send(`you were modded in the pasta land by <@${msg.author.id}> for:${modreason}`)
     }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
@@ -284,6 +294,8 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
         }
         msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
+        var unmodreason =  msg.content.split("").slice(29).join("")
+        client.users.cache.get(unmodtarget).send(`you were modded in the pasta land by <@${msg.author.id}> for:${unmodreason}`)
       } else {
       msg.reply(`<@${unmodtarget}> is not a mod`)
     }
@@ -305,6 +317,8 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unmutetarget).roles.add("757556192330514492");
         msg.guild.members.cache.get(unmutetarget).roles.add("732799191801397311");
         msg.reply(`<@${unmutetarget}> has been unmuted`)
+        var unmutereason =  msg.content.split("").slice(30).join("")
+        client.users.cache.get(unmutetarget).send(`you were unmuted in the pasta land by <@${msg.author.id}> for:${unmutereason}`)
       } else {
         msg.reply(`<@${unmutetarget}> is not currently mutted.`)
     }
