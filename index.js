@@ -237,7 +237,7 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(tempmodtarget).roles.add("765945607394164756");
           msg.guild.members.cache.get(tempmodtarget).roles.add("766444560976576533");
           msg.reply(`<@${tempmodtarget}> is now a temp mod`)
-          client.users.cache.get(modtarget).send(`you were made a temp mod in the pasta land`)
+          client.users.cache.get(tempmodtarget).send(`you were made a temp mod in the pasta land`)
           var timecontent =  msg.content.split("").slice(32).join("")
           var tempmod = cron.schedule(timecontent, () => {
             if(tempmodtarget2.roles.cache.find(r => r.name === "Temp mod don’t get any ideas")) {
@@ -269,6 +269,9 @@ client.on('message', async msg => {
       } else {
       msg.guild.members.cache.get(modtarget).roles.add("761295684497571872");
       msg.guild.members.cache.get(modtarget).roles.add("766444560976576533");
+      if(modtarget2.roles.cache.find(r => r.name === "was once a mod")) {
+        msg.guild.members.cache.get(modtarget).roles.remove("801605871107964958");
+        }
       msg.reply(`<@${modtarget}> is now a mod welcome to the cool kids club`)
       var modreason =  msg.content.split("").slice(27).join("")
       client.users.cache.get(modtarget).send(`you were modded in the pasta land by <@${msg.author.id}> for:${modreason}`)
@@ -293,6 +296,7 @@ client.on('message', async msg => {
         if(unmodtarget2.roles.cache.find(r => r.name === "admin")) {
           msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
         }
+        msg.guild.members.cache.get(unmodtarget).roles.add("801605871107964958");
         msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
         var unmodreason =  msg.content.split("").slice(29).join("")
         client.users.cache.get(unmodtarget).send(`you were demodded in the pasta land by <@${msg.author.id}> for:${unmodreason}`)
