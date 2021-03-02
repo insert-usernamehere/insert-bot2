@@ -14,6 +14,7 @@ const axios = require("axios");
 var cron = require("node-cron");
 const moment = require("moment");
 global.istempmod = 0;
+client.setMaxListeners(0);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -151,12 +152,15 @@ client.on('message', async msg => {
       msg.guild.members.cache.get(liscetraget).roles.add("757540103404126229");
       msg.reply(`<@${liscetraget}> is now lisced`)
       var liscereason =  msg.content.split("").slice(29).join("")
-      client.users.cache.get(liscetarget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
+      client.users.cache.get(liscetraget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
       if(liscetarget2.roles.cache.find(r => r.name === "Pasta Followers")) {
         msg.guild.members.cache.get(liscetraget).roles.remove("732808275128483872");
       } 
       if(liscetarget2.roles.cache.find(r => r.name === "Buddies")) {
         msg.guild.members.cache.get(liscetraget).roles.remove("757556192330514492");
+      } 
+      if(liscetarget2.roles.cache.find(r => r.name === "Muted")) {
+        msg.guild.members.cache.get(liscetraget).roles.remove("757938528087965747");
       } 
       if(liscetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
         msg.guild.members.cache.get(liscetraget).roles.remove("732799191801397311");
@@ -181,7 +185,7 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unliscetraget).roles.add("732799191801397311");
         msg.reply(`<@${unliscetraget}> has been unlisced`)
         var unliscereason =  msg.content.split("").slice(31).join("")
-        client.users.cache.get(unliscetarget).send(`you were unlisced in the pasta land by <@${msg.author.id}> for:${unliscereason}`)
+        client.users.cache.get(unliscetraget).send(`you were unlisced in the pasta land by <@${msg.author.id}> for:${unliscereason}`)
       } else {
         msg.reply(`<@${unliscetraget}> is not currently lisced.`)
     }
@@ -207,6 +211,9 @@ client.on('message', async msg => {
       } 
       if(mutetarget2.roles.cache.find(r => r.name === "Buddies")) {
         msg.guild.members.cache.get(mutetarget).roles.remove("757556192330514492");
+      } 
+      if(mutetarget2.roles.cache.find(r => r.name === "Penne Lisce")) {
+        msg.guild.members.cache.get(mutetarget).roles.remove("757540103404126229");
       } 
       if(mutetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
         msg.guild.members.cache.get(mutetarget).roles.remove("732799191801397311");
@@ -329,6 +336,21 @@ client.on('message', async msg => {
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
      }
+  }
+});
+
+client.on('message', async msg => {
+  if(msg.author.id == 775441791117819905) return;
+  if (msg.channel.id != "779060858449821716") {
+    const willuhhuh = (getRandomInt(50000));
+    if (willuhhuh > 200 && willuhhuh < 4000) {
+      const maybeuhhuh = (getRandomInt(100000));
+      if (maybeuhhuh > 5000 && maybeuhhuh < 8000) {
+        msg.channel.send("<:uhhuh:732807530190864485>")
+      } else if (maybeuhhuh > 200 && maybeuhhuh < 1000) {
+        msg.channel.send("<:uuhhh:760322838443196416>")
+      }
+    }
   }
 });
 
