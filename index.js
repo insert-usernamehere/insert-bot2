@@ -36,12 +36,6 @@ client.on('ready', () => {
 });
 
 client.on("message", async msg => {
-  if (msg.content.startsWith("insert")) {
-   if(msg.author.id != 666378959184855042) return;
-   const sayMessage = msg.content.split("insert").join(" ");
-   msg.delete();
-   msg.channel.send(sayMessage)
-};
   if (msg.content.startsWith("say")) {
    if(msg.author.id != 666378959184855042) return;
     global.dmmessage = msg.content.split("say").join(" ");
@@ -123,7 +117,7 @@ client.on('message', message => {
    }
    if (message.content.startsWith("setstatus")) {
     if(message.author.id != 666378959184855042) return;
-    const newstatus = message.content.split("setstatus ").join(" ");
+    const newstatus = message.content.split("setstatus ").join("");
     client.user.setActivity(`${newstatus}`, { type: "PLAYING"})
     client.users.cache.get("666378959184855042").send(`status set to${newstatus}`)
   }
@@ -341,10 +335,12 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if(msg.author.id == 775441791117819905) return;
+  if(msg.author.id == 239631525350604801) return;
+  if(msg.author.id == 432610292342587392) return;
   if (msg.channel.id != "779060858449821716") {
-    const willuhhuh = (getRandomInt(50000));
+    const willuhhuh = (getRandomInt(67570));
     if (willuhhuh > 200 && willuhhuh < 4000) {
-      const maybeuhhuh = (getRandomInt(100000));
+      const maybeuhhuh = (getRandomInt(294050));
       if (maybeuhhuh > 5000 && maybeuhhuh < 8000) {
         msg.channel.send("<:uhhuh:732807530190864485>")
       } else if (maybeuhhuh > 200 && maybeuhhuh < 1000) {
