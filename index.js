@@ -362,23 +362,48 @@ client.on('message', async msg => {
 client.on('message', async msg => {
   if (msg.content.startsWith(".wrongopinion")) {
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
-      let fancy = require("./wrongopinion.json");
-      console.log(fancy)
+      let rawfancy = fs.readFileSync('./wrongopinion.json');
+      let fancy = JSON.parse(rawfancy);
       var wrong1 = fancy.wrong
-      fancy.wrong = ++wrong1;
+      var wrong2 = ++wrong1;
       let writewrong = {
-        wrong: `${fancy.wrong}`
+        wrong: `${wrong2}`
       };
       let data = JSON.stringify(writewrong);
       fs.writeFileSync('./wrongopinion.json', data);
-      console.log(wrong1)
-      msg.channel.send(`<@696111945090203731> is wrong the counter is now at ${fancy.wrong}`)
+      msg.channel.send(`fancy is wrong the counter is now at ${wrong2}`)
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
     }
   }
   });
 
+  client.on('message', async msg => {
+  if (msg.content.startsWith(".rightopinion")) {
+    if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
+      let rawfancy = fs.readFileSync('./wrongopinion.json');
+      let fancy = JSON.parse(rawfancy);
+      var wrong1 = fancy.wrong
+      var wrong2 = --wrong1;
+      let writewrong = {
+        wrong: `${wrong2}`
+      };
+      let data = JSON.stringify(writewrong);
+      fs.writeFileSync('./wrongopinion.json', data);
+      msg.channel.send(`fancy is right? well thats new, the counter is now at ${wrong2}`)
+    } else {
+      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+    }
+  }
+  });
+
+  client.on('message', async msg => {
+  if (msg.content.startsWith(".fancywrongcount")) {
+    let rawfancy = fs.readFileSync('./wrongopinion.json');
+    let fancy = JSON.parse(rawfancy);
+    msg.channel.send(`fancy has had the wrong opinion ${fancy.wrong} times`)
+  }
+  });
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
   let member = newPresence.member;
