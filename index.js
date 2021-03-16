@@ -284,7 +284,7 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
-  if (msg.content.startsWith(".demod")) {
+  if (msg.content.startsWith(".unmod")) {
     if(msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
       let unmodtarget1 = msg.mentions.users.first();
       let unmodtarget = unmodtarget1.id
@@ -295,7 +295,7 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
         }
         if(unmodtarget2.roles.cache.find(r => r.name === "admin")) {
-          msg.guild.members.cache.get(unmodtarget).roles.remove("766444560976576533");
+          msg.guild.members.cache.get(unmodtarget).roles.remove("802691333155586069");
         }
         msg.guild.members.cache.get(unmodtarget).roles.add("801605871107964958");
         msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
@@ -343,7 +343,7 @@ client.on('message', async msg => {
       const maybeuhhuh = (getRandomInt(294050));
       if (maybeuhhuh > 5000 && maybeuhhuh < 8000) {
         msg.channel.send("<:uhhuh:732807530190864485>")
-      } else if (maybeuhhuh > 200 && maybeuhhuh < 1000) {
+      } else if (maybeuhhuh > 200 && maybeuhhuh < 500) {
         msg.channel.send("<:uuhhh:760322838443196416>")
       }
     }
@@ -366,7 +366,7 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 		}
 	}
   if (member.id === '241715517042327562') {
-		if (newPresence.status === 'online') {
+		if (newPresence.status === 'offline') {
 			client.channels.cache.get('775890270104715264').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
 		}
 	}
