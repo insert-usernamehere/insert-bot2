@@ -147,7 +147,6 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(liscetraget).roles.add("757540103404126229");
         msg.reply(`<@${liscetraget}> is now lisced`)
         var liscereason = msg.content.split("").slice(29).join("")
-        client.users.cache.get(liscetraget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
         if (liscetarget2.roles.cache.find(r => r.name === "Pasta Followers")) {
           msg.guild.members.cache.get(liscetraget).roles.remove("732808275128483872");
         }
@@ -160,6 +159,7 @@ client.on('message', async msg => {
         if (liscetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
           msg.guild.members.cache.get(liscetraget).roles.remove("732799191801397311");
         }
+        client.users.cache.get(liscetraget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
       }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
@@ -338,6 +338,20 @@ client.on('message', async msg => {
   if (msg.author.id == 775441791117819905) return;
   if (msg.author.id == 239631525350604801) return;
   if (msg.author.id == 432610292342587392) return;
+  if (msg.author.id == 794380049351966742) return;
+  if (msg.content === "$wa") return;
+  if (msg.content === "$im") return;
+  if (msg.content === "$m") return;
+  if (msg.content === "$mu") return;
+  if (msg.content === "$ima") return;
+  if (msg.content === "$p") return;
+  if (msg.content === "$mg") return;
+  if (msg.content === "$ma") return;
+  if (msg.content === "$h") return;
+  if (msg.content === "$hg") return;
+  if (msg.content === "$ha") return;
+  if (msg.content === "$w") return;
+  if (msg.content === "$wg") return;
   if (msg.channel.id != "779060858449821716") {
     const willuhhuh = (getRandomInt(67570));
     if (willuhhuh > 200 && willuhhuh < 4000) {
