@@ -21,6 +21,10 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 
 client.on('ready', () => {
   const randomnumber = (getRandomInt(2001));
@@ -372,6 +376,12 @@ client.on('message', async msg => {
   }
 });
 
+client.on('message', async msg => {
+  if (msg.content.startsWith("?poll")) {
+    await sleep(20);
+    msg.delete()
+  }
+});
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".wrongopinion")) {
