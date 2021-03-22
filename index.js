@@ -361,9 +361,9 @@ client.on('message', async msg => {
     if (willuhhuh > 200 && willuhhuh < 4000) {
       const maybeuhhuh = (getRandomInt(294050));
       if (maybeuhhuh > 5000 && maybeuhhuh < 8000) {
-        msg.channel.send("<:uhhuh:732807530190864485>")
+        msg.react('732807530190864485')
       } else if (maybeuhhuh > 200 && maybeuhhuh < 500) {
-        msg.channel.send("<:uuhhh:760322838443196416>")
+        msg.react('760322838443196416')
       }
     }
   }
