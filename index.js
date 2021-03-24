@@ -136,6 +136,7 @@ client.on('message', message => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".lisce")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let liscetarget1 = msg.mentions.users.first();
       let liscetraget = liscetarget1.id
@@ -173,6 +174,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unlisce")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let unliscetarget1 = msg.mentions.users.first();
       let unliscetraget = unliscetarget1.id
@@ -196,6 +198,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".mute")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let mutetarget1 = msg.mentions.users.first();
       let mutetarget = mutetarget1.id
@@ -228,6 +231,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".tempmod")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       if (istempmod == 1) {
         msg.reply("a temp mod is already running due to discord and js limitations only one person can be a temp mod at a time.")
@@ -266,6 +270,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".mod")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
       let modtarget1 = msg.mentions.users.first();
       let modtarget = modtarget1.id
@@ -290,6 +295,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unmod")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
       let unmodtarget1 = msg.mentions.users.first();
       let unmodtarget = unmodtarget1.id
@@ -317,6 +323,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unmute")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let unmutetarget1 = msg.mentions.users.first();
       let unmutetarget = unmutetarget1.id
@@ -377,7 +384,7 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
-  if (msg.content.startsWith("?poll")) {
+  if (msg.content.toLowerCase().startsWith("?poll")) {
     await sleep(20);
     msg.delete()
   }
@@ -385,6 +392,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".wrongopinion")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let rawfancy = fs.readFileSync('./wrongopinion.json');
       let fancy = JSON.parse(rawfancy);
@@ -404,6 +412,7 @@ client.on('message', async msg => {
 
   client.on('message', async msg => {
   if (msg.content.startsWith(".rightopinion")) {
+    if (message.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let rawfancy = fs.readFileSync('./wrongopinion.json');
       let fancy = JSON.parse(rawfancy);
@@ -423,6 +432,7 @@ client.on('message', async msg => {
 
   client.on('message', async msg => {
   if (msg.content.startsWith(".fancywrongcount")) {
+    if (message.guild.id != '732793772697583623') return;
     let rawfancy = fs.readFileSync('./wrongopinion.json');
     let fancy = JSON.parse(rawfancy);
     msg.channel.send(`fancy has had the wrong opinion ${fancy.wrong} times`)
@@ -430,60 +440,61 @@ client.on('message', async msg => {
   });
 
 client.on('presenceUpdate', (oldPresence, newPresence) => {
+  if (newPresence.guild.id != '732793772697583623') return;
   let member = newPresence.member;
   if (member.id === '666378959184855042') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('775416029429366854').send('Insert opened discord what will he do');
+      client.channels.cache.get('824067984963141652').send('Insert opened discord what will he do');
     }
   }
   if (member.id === '241715517042327562') {
     if (newPresence.status === 'offline') {
-      client.channels.cache.get('775890270104715264').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
+      client.channels.cache.get('824067984963141652').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
     }
   }
   if (member.id === '544901224277999616') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('775876460472827934').send('fetts awake time to not die');
+      client.channels.cache.get('824067984963141652').send('fetts awake time to not die');
     }
   }
   if (member.id === '682713876562706433') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('776911204089724939').send('Look who decided to join! Buckets online.');
+      client.channels.cache.get('824067984963141652').send('Look who decided to join! Buckets online.');
     }
   }
   if (member.id === '683248359322288152') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('775876408866111509').send('Oh look, the cat dragged in a rogue FBI!');
+      client.channels.cache.get('824067984963141652').send('Oh look, the cat dragged in a rogue FBI!');
     }
   }
   if (member.id === '603319344801251399') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('789489128747958294').send('Greenlog came out of his Forrest. Hide your cheese.');
+      client.channels.cache.get('824067984963141652').send('Greenlog came out of his Forrest. Hide your cheese.');
     }
   }
   if (member.id === '701148265202188418') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('785229828663934996').send('cat with no legs is using discord, how can he do it without legs');
+      client.channels.cache.get('824067984963141652').send('cat with no legs is using discord, how can he do it without legs');
     }
   }
   if (member.id === '423548273358405632') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('775880905994010644').send('sploot is awake, hide your children');
+      client.channels.cache.get('824067984963141652').send('sploot is awake, hide your children');
     }
   }
   if (member.id === '345959899097989121') {
     if (newPresence.status === 'dnd') {
-      client.channels.cache.get('775882929439244298').send('Misc is online. Prepare your OwOs.');
+      client.channels.cache.get('824067984963141652').send('Misc is online. Prepare your OwOs.');
     }
   }
   if (member.id === '241715517042327562') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('775890270104715264').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
+      client.channels.cache.get('824067984963141652').send('The firey pits of hell itself have opened and spat out 3vango. Run.');
     }
   }
   if (member.id === '654877061877465101') {
     if (newPresence.status === 'online') {
-      client.channels.cache.get('811279561034694697').send('oh peck, golem is here');
+      client.channels.cache.get('824067984963141652').send('oh peck, golem is here');
     }
   }
 });
