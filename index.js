@@ -136,7 +136,7 @@ client.on('message', message => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".lisce")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let liscetarget1 = msg.mentions.users.first();
       let liscetraget = liscetarget1.id
@@ -174,7 +174,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unlisce")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let unliscetarget1 = msg.mentions.users.first();
       let unliscetraget = unliscetarget1.id
@@ -198,7 +198,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".mute")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let mutetarget1 = msg.mentions.users.first();
       let mutetarget = mutetarget1.id
@@ -231,7 +231,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".tempmod")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       if (istempmod == 1) {
         msg.reply("a temp mod is already running due to discord and js limitations only one person can be a temp mod at a time.")
@@ -270,7 +270,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".mod")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
       let modtarget1 = msg.mentions.users.first();
       let modtarget = modtarget1.id
@@ -295,7 +295,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unmod")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Rigatoni Rulers")) {
       let unmodtarget1 = msg.mentions.users.first();
       let unmodtarget = unmodtarget1.id
@@ -323,7 +323,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".unmute")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let unmutetarget1 = msg.mentions.users.first();
       let unmutetarget = unmutetarget1.id
@@ -392,7 +392,7 @@ client.on('message', async msg => {
 
 client.on('message', async msg => {
   if (msg.content.startsWith(".wrongopinion")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let rawfancy = fs.readFileSync('./wrongopinion.json');
       let fancy = JSON.parse(rawfancy);
@@ -412,7 +412,7 @@ client.on('message', async msg => {
 
   client.on('message', async msg => {
   if (msg.content.startsWith(".rightopinion")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
       let rawfancy = fs.readFileSync('./wrongopinion.json');
       let fancy = JSON.parse(rawfancy);
@@ -432,7 +432,7 @@ client.on('message', async msg => {
 
   client.on('message', async msg => {
   if (msg.content.startsWith(".fancywrongcount")) {
-    if (message.guild.id != '732793772697583623') return;
+    if (msg.guild.id != '732793772697583623') return;
     let rawfancy = fs.readFileSync('./wrongopinion.json');
     let fancy = JSON.parse(rawfancy);
     msg.channel.send(`fancy has had the wrong opinion ${fancy.wrong} times`)
