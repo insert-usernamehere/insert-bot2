@@ -1,13 +1,3 @@
-const express = require('express');
-const app = express();
-const port = 3000;
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
-app.listen(port, () =>
-  console.log(`Example app listening at http://localhost:${port}`)
-);
-
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require("axios");
@@ -27,6 +17,10 @@ function sleep(ms) {
 
 
 client.on('ready', () => {
+  client.api.applications(client.user.id).guilds('732793772697583623').commands.post({data: {
+    name: 'inserttest',
+    description: 'insert testing things'
+  }})
   const randomnumber = (getRandomInt(2001));
   if (randomnumber == 5) {
     client.user.setActivity("theres a 1 in 2000 chance that this is my status", { type: "PLAYING" })
@@ -39,6 +33,8 @@ client.on('ready', () => {
   }
   console.log('bot is up and running');
 });
+
+
 
 client.on("message", async msg => {
   if (msg.content.startsWith("say")) {
@@ -124,7 +120,21 @@ client.on('message', message => {
     if (message.author.id != 666378959184855042) return;
     const newstatus = message.content.split("setstatus ").join("");
     client.user.setActivity(`${newstatus}`, { type: "PLAYING" })
-    client.users.cache.get("666378959184855042").send(`status set to${newstatus}`)
+    client.users.cache.get("666378959184855042").send(`status set to ${newstatus}`)
+  }
+  if (message.content.startsWith("randomstatus")) {
+    if (message.author.id != 666378959184855042) return;
+    const randomnumber = (getRandomInt(2001));
+    if (randomnumber == 5) {
+      client.user.setActivity("theres a 1 in 2000 chance that this is my status", { type: "PLAYING" })
+    } else if (randomnumber > 1500) {
+      client.user.setActivity("taking over the pasta land", { type: "PLAYING" })
+    } else if (randomnumber < 30) {
+      client.user.setActivity("none of your business", { type: "PLAYING" })
+    } else if (randomnumber > 30) {
+      client.user.setActivity("taking over the world", { type: "PLAYING" })
+    }
+    client.users.cache.get("666378959184855042").send(`randomized status`)
   }
   if (message.channel.type == "dm") {
     if (message.author.id == 666378959184855042) return;
@@ -376,6 +386,15 @@ client.on('message', async msg => {
   }
 });
 
+client.ws.on('INTERACTION_CREATE', async interaction => {
+  client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+    type: 4,
+    data: {
+      content: 'slash command pong'
+    }
+  }})
+})
+
 client.on('message', async msg => {
   if (msg.content === "how long until splatoon 3") {
     let splat3 = moment("20221218", "YYYYMMDD").fromNow();
@@ -500,4 +519,4 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 });
 
 
-client.login(process.env.TOKEN);
+client.login('TOKEN');
