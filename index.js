@@ -4,6 +4,8 @@ const axios = require("axios");
 var cron = require("node-cron");
 const moment = require("moment");
 const fs = require('fs')
+const Keyv = require('keyv');
+const udata = new Keyv('sqlite:database.sqlite');
 global.istempmod = 0;
 client.setMaxListeners(0);
 
@@ -17,11 +19,11 @@ function sleep(ms) {
 
 
 client.on('ready', () => {
-  client.api.applications(client.user.id).guilds('732793772697583623').commands.post({data: {
+  client.api.applications(client.user.id).guilds('699285282276507708').commands.post({data: {
     name: 'inserttest',
     description: 'insert testing things'
   }})
-  const randomnumber = (getRandomInt(2001));
+  var randomnumber = (getRandomInt(2001));
   if (randomnumber == 5) {
     client.user.setActivity("theres a 1 in 2000 chance that this is my status", { type: "PLAYING" })
   } else if (randomnumber > 1500) {
@@ -31,6 +33,18 @@ client.on('ready', () => {
   } else if (randomnumber > 30) {
     client.user.setActivity("taking over the world", { type: "PLAYING" })
   }
+  cron.schedule('* 12 * * *', () => {
+    var randomnumber = (getRandomInt(2001));
+    if (randomnumber == 5) {
+      client.user.setActivity("theres a 1 in 2000 chance that this is my status", { type: "PLAYING" })
+    } else if (randomnumber > 1500) {
+      client.user.setActivity("taking over the pasta land", { type: "PLAYING" })
+    } else if (randomnumber < 30) {
+      client.user.setActivity("none of your business", { type: "PLAYING" })
+    } else if (randomnumber > 30) {
+      client.user.setActivity("taking over the world", { type: "PLAYING" })
+    }
+  });
   console.log('bot is up and running');
 });
 
@@ -403,58 +417,66 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
+  if (msg.channel.id != "789142506738417665") return;
   if (msg.content.toLowerCase().startsWith("?poll")) {
     await sleep(20);
     msg.delete()
   }
 });
 
-client.on('message', async msg => {
-  if (msg.content.startsWith(".wrongopinion")) {
-    if (msg.guild.id != '732793772697583623') return;
-    if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
-      let rawfancy = fs.readFileSync('./wrongopinion.json');
-      let fancy = JSON.parse(rawfancy);
-      var wrong1 = fancy.wrong
-      var wrong2 = ++wrong1;
-      let writewrong = {
-        wrong: `${wrong2}`
-      };
-      let data = JSON.stringify(writewrong);
-      fs.writeFileSync('./wrongopinion.json', data);
-      msg.channel.send(`fancy is wrong the counter is now at ${wrong2}`)
-    } else {
-      msg.channel.send("you don't have enough power to do this come back when your more powerful")
-    }
-  }
-  });
 
   client.on('message', async msg => {
-  if (msg.content.startsWith(".rightopinion")) {
-    if (msg.guild.id != '732793772697583623') return;
-    if (msg.member.roles.cache.find(r => r.name === "Macaroni Moderators")) {
-      let rawfancy = fs.readFileSync('./wrongopinion.json');
-      let fancy = JSON.parse(rawfancy);
-      var wrong1 = fancy.wrong
-      var wrong2 = --wrong1;
-      let writewrong = {
-        wrong: `${wrong2}`
-      };
-      let data = JSON.stringify(writewrong);
-      fs.writeFileSync('./wrongopinion.json', data);
-      msg.channel.send(`fancy is right? well thats new, the counter is now at ${wrong2}`)
-    } else {
-      msg.channel.send("you don't have enough power to do this come back when your more powerful")
+    if (msg.content.startsWith(".wrongopinion")) {
+      if (msg.guild.id != '732793772697583623') return;
+      if (msg.member.roles.cache.find(r => r.name === "Buddies")) {
+        let wronguserping = msg.mentions.users.first();
+        let wronguser = wronguserping.id
+        if (msg.author.id === wronguserping.id) return;
+        var dataa1 = await udata.get('w' + wronguser)
+        if (dataa1 == null) {
+         await udata.set('w' + wronguser, 0);
+       }
+        var dataa1 = await udata.get('w' + wronguser)
+        var newdata = ++dataa1
+        await udata.set('w' + wronguser, newdata);
+        let data = await udata.get('w' + wronguser)
+        msg.channel.send(`<@${wronguser}> is wrong their counter is now at ${data}`)
     }
   }
-  });
+    });
 
   client.on('message', async msg => {
-  if (msg.content.startsWith(".fancywrongcount")) {
+    if (msg.content.startsWith(".rightopinion")) {
+      if (msg.guild.id != '732793772697583623') return;
+      if (msg.member.roles.cache.find(r => r.name === "Buddies")) {
+        let wronguserping = msg.mentions.users.first();
+        let wronguser = wronguserping.id
+        if (msg.author.id === wronguserping.id) return;
+        var dataa1 = await udata.get('w' + wronguser)
+        if (dataa1 == null) {
+          await udata.set('w' + wronguser, 0);
+        }
+        var dataa1 = await udata.get('w' + wronguser)
+        var newdata = --dataa1
+        await udata.set('w' + wronguser, newdata);
+        let data = await udata.get('w' + wronguser)
+        msg.channel.send(`<@${wronguser}> is right their counter is now at ${data}`)
+    }
+  }
+    });
+
+
+  client.on('message', async msg => {
+  if (msg.content.startsWith(".wrongcount")) {
     if (msg.guild.id != '732793772697583623') return;
-    let rawfancy = fs.readFileSync('./wrongopinion.json');
-    let fancy = JSON.parse(rawfancy);
-    msg.channel.send(`fancy has had the wrong opinion ${fancy.wrong} times`)
+    let wronguserping = msg.mentions.users.first();
+    let wronguser = wronguserping.id
+    var dataa1 = await udata.get('w' + wronguser)
+    if (dataa1 == null) {
+      await udata.set('w' + wronguser, 0);
+    }
+    var dataa1 = await udata.get('w' + wronguser)
+    msg.channel.send(`${wronguserping.username} has been wrong ${dataa1} times`) 
   }
   });
 
@@ -519,4 +541,4 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 });
 
 
-client.login('TOKEN');
+client.login('bot');
