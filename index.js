@@ -6,6 +6,8 @@ const moment = require("moment");
 const fs = require('fs')
 const Keyv = require('keyv');
 const udata = new Keyv('sqlite:database.sqlite');
+client.nick = new Map();
+const calc = require('mathjs');
 global.istempmod = 0;
 client.setMaxListeners(0);
 
@@ -183,12 +185,20 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(liscetraget).roles.remove("757556192330514492");
         }
         if (liscetarget2.roles.cache.find(r => r.name === "Muted")) {
+          if (await udata.get('mp' + liscetraget) == 1) {
+            await udata.set('lp' + liscetraget, 1);
+            await udata.set('mp' + liscetraget, 0);
+          }
           msg.guild.members.cache.get(liscetraget).roles.remove("757938528087965747");
         }
         if (liscetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
           msg.guild.members.cache.get(liscetraget).roles.remove("732799191801397311");
         }
-        client.users.cache.get(liscetraget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`)
+        if (liscetarget2.roles.cache.find(r => r.name === "Pasta Poll Person")) {
+          await udata.set('lp' + liscetraget, 1);
+          msg.guild.members.cache.get(liscetraget).roles.remove("789522361455345684");
+        }
+        client.users.cache.get(liscetraget).send(`you were lisced in the pasta land by <@${msg.author.id}> for:${liscereason}`).catch(msg.channel.send(`failed to dm user`))
       }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
@@ -208,9 +218,13 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unliscetraget).roles.add("732808275128483872");
         msg.guild.members.cache.get(unliscetraget).roles.add("757556192330514492");
         msg.guild.members.cache.get(unliscetraget).roles.add("732799191801397311");
+        if (await udata.get('lp' + unliscetraget) == 1) {
+          await udata.set('lp' + unliscetraget, 0);
+          msg.guild.members.cache.get(unliscetraget).roles.add("789522361455345684");
+        }
         msg.reply(`<@${unliscetraget}> has been unlisced`)
         var unliscereason = msg.content.split("").slice(31).join("")
-        client.users.cache.get(unliscetraget).send(`you were unlisced in the pasta land by <@${msg.author.id}> for:${unliscereason}`)
+        client.users.cache.get(unliscetraget).send(`you were unlisced in the pasta land by <@${msg.author.id}> for:${unliscereason}`).catch(msg.channel.send(`failed to dm user`))
       } else {
         msg.reply(`<@${unliscetraget}> is not currently lisced.`)
       }
@@ -239,13 +253,22 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(mutetarget).roles.remove("757556192330514492");
         }
         if (mutetarget2.roles.cache.find(r => r.name === "Penne Lisce")) {
+          if (await udata.get('lp' + mutetraget) == 1) {
+            await udata.set('lp' + mutetraget, 0);
+            await udata.set('mp' + mutetraget, 1);
+          }
+          await udata.set('lp' + mutetarget, 0);
           msg.guild.members.cache.get(mutetarget).roles.remove("757540103404126229");
         }
         if (mutetarget2.roles.cache.find(r => r.name === "Pasta Lovers")) {
           msg.guild.members.cache.get(mutetarget).roles.remove("732799191801397311");
         }
+        if (mutetarget2.roles.cache.find(r => r.name === "Pasta Poll Person")) {
+          await udata.set('mp' + mutetarget, 1);
+          msg.guild.members.cache.get(mutetarget).roles.remove("789522361455345684");
+        }
         var mutereason = msg.content.split("").slice(28).join("")
-        client.users.cache.get(mutetarget).send(`you were muted in the pasta land by <@${msg.author.id}> for:${mutereason}`)
+        client.users.cache.get(mutetarget).send(`you were muted in the pasta land by <@${msg.author.id}> for:${mutereason}`).catch(msg.channel.send(`failed to dm user`))
       }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
@@ -271,7 +294,11 @@ client.on('message', async msg => {
           msg.guild.members.cache.get(tempmodtarget).roles.add("765945607394164756");
           msg.guild.members.cache.get(tempmodtarget).roles.add("766444560976576533");
           msg.reply(`<@${tempmodtarget}> is now a temp mod`)
-          client.users.cache.get(tempmodtarget).send(`you were made a temp mod in the pasta land`)
+          try {
+            client.users.cache.get(tempmodtarget).send(`you were made a temp mod in the pasta land`).catch(msg.channel.send(`failed to dm user`))
+          } catch(err) {
+            msg.channel.send(`failed to dm user`)
+          }
           var timecontent = msg.content.split("").slice(32).join("")
           var tempmod = cron.schedule(timecontent, () => {
             if (tempmodtarget2.roles.cache.find(r => r.name === "Temp mod don’t get any ideas")) {
@@ -280,8 +307,8 @@ client.on('message', async msg => {
             if (tempmodtarget2.roles.cache.find(r => r.name === "Moderators")) {
               msg.guild.members.cache.get(tempmodtarget).roles.remove("766444560976576533");
             }
-            client.users.cache.get(tempmodtarget).send(`your tempmod in the pastaland expired`)
             global.istempmod = 0;
+            client.users.cache.get(tempmodtarget).send(`your tempmod in the pastaland expired`).catch(console.log(`a fun error`))
             tempmod.stop();
           });
         }
@@ -309,8 +336,8 @@ client.on('message', async msg => {
         }
         msg.reply(`<@${modtarget}> is now a mod welcome to the cool kids club`)
         var modreason = msg.content.split("").slice(27).join("")
-        client.users.cache.get(modtarget).send(`you were modded in the pasta land by <@${msg.author.id}> for:${modreason}`)
-      }
+        client.users.cache.get(modtarget).send(`you were modded in the pasta land by <@${msg.author.id}> for:${modreason}`).catch(msg.channel.send(`failed to dm user`))
+        }
     } else {
       msg.channel.send("you don't have enough power to do this come back when your more powerful")
     }
@@ -335,7 +362,8 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unmodtarget).roles.add("801605871107964958");
         msg.reply(`<@${unmodtarget}> is no longer a mod you may now laugh at them`)
         var unmodreason = msg.content.split("").slice(29).join("")
-        client.users.cache.get(unmodtarget).send(`you were demodded in the pasta land by <@${msg.author.id}> for:${unmodreason}`)
+          client.users.cache.get(unmodtarget).send(`you were demodded in the pasta land by <@${msg.author.id}> for:${unmodreason}`).catch(msg.channel.send(`failed to dm user`))
+          msg.channel.send(`failed to dm user`)
       } else {
         msg.reply(`<@${unmodtarget}> is not a mod`)
       }
@@ -357,9 +385,13 @@ client.on('message', async msg => {
         msg.guild.members.cache.get(unmutetarget).roles.add("732808275128483872");
         msg.guild.members.cache.get(unmutetarget).roles.add("757556192330514492");
         msg.guild.members.cache.get(unmutetarget).roles.add("732799191801397311");
+        if (await udata.get('mp' + unmutetraget) == 1) {
+          await udata.set('mp' + unmutetraget, 0);
+          msg.guild.members.cache.get(unmutetraget).roles.add("789522361455345684");
+        }
         msg.reply(`<@${unmutetarget}> has been unmuted`)
         var unmutereason = msg.content.split("").slice(30).join("")
-        client.users.cache.get(unmutetarget).send(`you were unmuted in the pasta land by <@${msg.author.id}> for:${unmutereason}`)
+        client.users.cache.get(unmutetarget).send(`you were unmuted in the pasta land by <@${msg.author.id}> for:${unmutereason}`).catch(msg.channel.send(`failed to dm user`))
       } else {
         msg.reply(`<@${unmutetarget}> is not currently mutted.`)
       }
@@ -417,6 +449,15 @@ client.on('message', async msg => {
 });
 
 client.on('message', async msg => {
+  if (msg.content.startsWith(".math")) {
+    var mathe =  msg.content.split("").slice(6).join("")
+    var math =  calc.evaluate(mathe)
+    var mathd = math.toFixed(5);
+    msg.channel.send(`\`${mathe}\` equals \`${mathd}\``)
+  }
+});
+
+client.on('message', async msg => {
   if (msg.channel.id != "789142506738417665") return;
   if (msg.content.toLowerCase().startsWith("?poll")) {
     await sleep(20);
@@ -424,6 +465,21 @@ client.on('message', async msg => {
   }
 });
 
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  if(newMember.nickname && oldMember.nickname !== newMember.nickname) {
+    if (client.nick.get(newMember.id) == null) {
+      client.nick.set(newMember.id, 0);
+    }
+    if (client.nick.get(newMember.id) !== 0) {
+      client.nick.set(newMember.id, 0);
+    } else {
+      if (newMember.roles.cache.find(r => r.name === "no nickname changes")) {
+        client.nick.set(newMember.id, 1);
+        newMember.setNickname(oldMember.nickname)
+      }
+    }
+  }
+});
 
   client.on('message', async msg => {
     if (msg.content.startsWith(".wrongopinion")) {
@@ -541,4 +597,4 @@ client.on('presenceUpdate', (oldPresence, newPresence) => {
 });
 
 
-client.login('bot');
+client.login('botid');
