@@ -420,13 +420,19 @@ client.on('message', async msg => {
   if (msg.content === "$w") return;
   if (msg.content === "$wg") return;
   if (msg.channel.id != "779060858449821716") {
-    const willuhhuh = (getRandomInt(67570));
+    const willuhhuh = (getRandomInt(97570));
     if (willuhhuh > 200 && willuhhuh < 4000) {
-      const maybeuhhuh = (getRandomInt(294050));
+      const maybeuhhuh = (getRandomInt(2294750));
       if (maybeuhhuh > 5000 && maybeuhhuh < 8000) {
         msg.react('732807530190864485')
       } else if (maybeuhhuh > 200 && maybeuhhuh < 500) {
         msg.react('760322838443196416')
+      } else if (maybeuhhuh > 800 && maybeuhhuh < 123456) {
+        msg.react('⭐')
+      } else if (maybeuhhuh > 123458 && maybeuhhuh < 272465) {
+        msg.react('837076499697631274')
+      } else if (mayveuhhuh > 1596462 && maybeuhhuh < 2164963) {
+        msg.react('814695779628351488')
       }
     }
   }
@@ -436,7 +442,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
   client.api.interactions(interaction.id, interaction.token).callback.post({data: {
     type: 4,
     data: {
-      content: 'slash command pong'
+      content: 'oh hey you discovered an easter egg!'
     }
   }})
 })
